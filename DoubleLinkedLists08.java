@@ -115,8 +115,154 @@ public class DoubleLinkedLists08 {
     while (current != null) {
         current.data.tampil();
         current = current.next;
+        }
     }
-}
+
+    public void add(int index, Mahasiswa08 data) {
+        if (index < 0) {
+            System.out.println("Indeks tidak valid.");
+            return;
+        }
+        if (index == 0) {
+            addFirst(data);
+            return;
+        }
+        Node08 current = head;
+        int count = 0;
+        while (current != null && count < index - 1) {
+            current = current.next;
+            count++;
+        }
+        if (current == null) {
+            System.out.println("Indeks melebihi panjang list.");
+            return;
+        }
+        if (current == tail) {
+            addLast(data);
+            return;
+        }
+        Node08 newNode = new Node08(data, current.next, current);
+        current.next.prev = newNode;
+        current.next = newNode;
+    }
+
+    public void removeAfter(String keyNim) {
+        Node08 current = head;
+        while (current != null && !current.data.nim.equals(keyNim)) {
+            current = current.next;
+        }
+        if (current == null) {
+            System.out.println("Node dengan NIM " + keyNim + " tidak ditemukan.");
+            return;
+        }
+        if (current.next == null) {
+            System.out.println("Tidak ada node setelah NIM " + keyNim + " yang bisa dihapus.");
+            return;
+        }
+        Node08 nodeToRemove = current.next;
+        if (nodeToRemove == tail) {
+            tail = current;
+            current.next = null;
+        } else {
+            current.next = nodeToRemove.next;
+            nodeToRemove.next.prev = current;
+        }
+        System.out.println("Node setelah NIM " + keyNim + " berhasil dihapus.");
+    }
 
 
+    public void remove(int index) {
+        if (isEmpty()) {
+            System.out.println("List kosong, tidak bisa dihapus");
+            return;
+        }
+        if (index < 0) {
+            System.out.println("Indeks tidak valid.");
+            return;
+        }
+        if (index == 0) {
+            removeFirst();
+            return;
+        }
+        Node08 current = head;
+        int count = 0;
+        while (current != null && count < index) {
+            current = current.next;
+            count++;
+        }
+        if (current == null) {
+            System.out.println("Indeks melebihi panjang list.");
+            return;
+        }
+        if (current == tail) {
+            removeLast();
+            return;
+        }
+        // Hapus node di tengah
+        current.prev.next = current.next;
+        current.next.prev = current.prev;
+    }
+    
+    public void remove(String nim) {
+        Node08 current = head;
+        while (current != null && !current.data.nim.equals(nim)) {
+            current = current.next;
+        }
+        if (current == null) {
+            System.out.println("Node dengan NIM " + nim + " tidak ditemukan.");
+            return;
+        }
+        if (current == head) {
+            removeFirst();
+        } else if (current == tail) {
+            removeLast();
+        } else {
+            current.prev.next = current.next;
+            current.next.prev = current.prev;
+        }
+    }
+
+    public void getFirst() {
+        if (isEmpty()) {
+            System.out.println("List kosong.");
+        } else {
+            System.out.print("Data pada node head: ");
+            head.data.tampil();
+        }
+    }  
+
+    public void getLast() {
+        if (isEmpty()) {
+            System.out.println("List kosong.");
+        } else {
+            System.out.print("Data pada node tail: ");
+            tail.data.tampil();
+        }  
+    }
+
+    public void getIndex(int index) {
+        if (isEmpty()) {
+            System.out.println("List kosong.");
+            return;
+        }
+        if (index < 0) {
+            System.out.println("Indeks tidak valid.");
+            return;
+            }
+        Node08 current = head;
+        int count = 0;
+        while (current != null && count < index) {
+            current = current.next;
+            count++;
+        }
+        if (current == null) {
+            System.out.println("Indeks melebihi panjang list.");
+        } else {
+            System.out.print("Data pada indeks ke-" + index + ": ");
+            current.data.tampil();
+        }
+    }
+
+    public void
 }
+
