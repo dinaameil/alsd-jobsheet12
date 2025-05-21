@@ -263,6 +263,15 @@ public class DoubleLinkedLists08 {
         }
     }
 
-    public void
+    int size() {
+    int count = 0;
+    Node08 current = head;
+    while (current != null) {
+        count++;
+        current = current.next;
+    }
+    return count;
+    }
+
 }
 
