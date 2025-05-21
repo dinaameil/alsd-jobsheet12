@@ -39,7 +39,7 @@ public class DoubleLinkedLists08 {
 
     public void removeFirst() {
         if (isEmpty()) {
-            System.out.println("List is empty");
+            System.out.println("List kosong, tidak bisa dihapus");
             return;
         }
         if (head == tail) {
@@ -53,7 +53,7 @@ public class DoubleLinkedLists08 {
 
     public void removeLast() {
         if (isEmpty()) {
-            System.out.println("List is empty");
+            System.out.println("List kosong, tidak bisa dihapus");
             return;
         }
         if (head == tail) {
